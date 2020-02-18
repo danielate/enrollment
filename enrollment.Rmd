@@ -1,0 +1,31 @@
+---
+title: "Enrollment"
+author: "Daniela Teran"
+date: "2/18/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(readxl)
+library(tidyverse)
+library(janitor)
+library(reprex)
+library(gt)
+```
+```{r}
+# Read data using read_excel(path = "name_of_file", [skip first 3 lines] skip = 3) 
+# Use clean_names() to change the titles format
+# Use filter(! is.na(course_name)) to remove all NAs form course_name column to remove the grand total rows
+# Use filter(course_department == "Government") to select only Government courses
+
+
+data <- read_excel(path = "class_enrollment_summary_by_term2.18.20.xlsx", skip = 3) %>%
+  clean_names() %>%
+  filter(! is.na(course_name)) %>%
+  group_by(course_department) 
+
+data
+```
+
